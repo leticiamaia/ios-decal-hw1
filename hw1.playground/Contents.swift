@@ -21,32 +21,31 @@ class Words {
 //: ### Are the values passed in to the **init** function and those set to the instance
 //: ### variables the same type? If not, why?
 
-
-//: [EXPLAIN YOUR ANSWER HERE]
+//: [EXPLAIN YOUR ANSWER HERE] No, because the variables are unwrapped optionals, whereas the arguments passed are wrapped optionals, so when the set part occurs, the arguments are unwrapped.
 
 
 //: ## Q2: Variable Types and Function Types
-    func arePalindromes(words: [String]) -> Bool {
+    static func arePalindromes(words: [String]) -> Bool {
         let reversedWords = words.map() {String($0.characters.reverse())}
         var numElements = words.count
         
-        for let i = 0; i < numElements; i++ {
+        for var i = 0; i < numElements; i++ {
             if words[i] != reversedWords[i] {
                 return false
             }
         }
+        return true
     }
 //: ### Why does the compiler dislike the **for loop**? Fix it.
 //: ### What else is wrong with this function? You may have to refer to (but **not**
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
-
+//: [EXPLAIN YOUR ANSWER HERE] It disliked the for loop because variable i was declared as a constant, but should have been declared as a variable, with var. Also, the function sould be declared as static, because of the static function call at the bottom, and there should be an extra return statement in the end.
 
 //: ## Q3: More Functions and Object Initialization
-    class func isAnagram() -> Bool {
-        var countLetters : [Character : Int] //Line X
+    func isAnagram() -> Bool {
+        var countLetters = [Character : Int]() //Line X
         var lenA = self.wordA.characters.count
         var lenB = self.wordB.characters.count
         
@@ -81,7 +80,7 @@ class Words {
             }
         }
         
-        return nil
+        return true
     }
 //: ### What is the problem with declaring **countLetters** as we do in **Line X**,
 //: ### and then using it in **Line Y**? Fix it (by only changing **Line X**).
@@ -89,7 +88,7 @@ class Words {
 //: ### change) the code at the very bottom. Debug the function.
 
 
-//: [EXPLAIN YOUR ANSWER HERE]
+//: [EXPLAIN YOUR ANSWER HERE] The problem is that the object countLetters was not initialized, therefore, its value was NIL. Also the function cannot return NIL when the return type is bool, and the function should not have been declared as a class function, since it is a regular instance function.
     
     
 }
